@@ -8,7 +8,7 @@ import { USER } from "../../../app/utils/constants/LocalStorageKeys";
 const AdminRequire: React.FC = () => {
   
    const isAdmin =LocalStorage.get(USER) == import.meta.env.VITE_ADMIN_KEY;
-  return isAdmin ? <Outlet /> : <Navigate to={"elfasa/notfound"} />;
+  return isAdmin ? <Outlet /> : <Navigate to={"/elfasa"} />;
 };
 
 export default AdminRequire;

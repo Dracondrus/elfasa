@@ -1,0 +1,26 @@
+.admin__menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.container__menu {
+    margin: 0 auto;
+    max-width: 576px;
+    position: relative;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around; /* Равномерное распределение элементов */
+    position: fixed; /* Фиксируем внизу */
+    bottom: 0;
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Смещаем влево на половину ширины */
+    width: 100%;
+    max-width: 576px; /* Ограничиваем ширину */
+
+    padding: 12px 0;
+   
+    border-top: 1px solid #ddd; /* Линия сверху для отделения от контента */
+}

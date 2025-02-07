@@ -14,6 +14,8 @@ import Auth from "../../features/app/components/auth/Auth";
 import RequireAuth from "../../features/app/components/require-auth/RequireAuth";
 import AdminRequire from "../../features/admin/components/admin-require/AdminRequire";
 import AdminLayout from "../../features/admin/components/admin-layout/AdminLayout";
+import Products from "../../features/app/components/products/Products";
+import Admin from "../../features/admin/components/admin/admin";
 
 const RootRouter: React.FC = () => {
 
@@ -25,17 +27,19 @@ const RootRouter: React.FC = () => {
           <Route path="elfasa/auth" element={<Auth/>}/>
         </Route>
       <Route path="elfasa/" element={<MainLayout />}>
+      <Route index element={<Products />} /> 
         <Route element={<RequireAuth/>}>
         {rootRoutes()?.map((route, index) => (
               <Route
                 key={index}
-                path={`/elfasa/${exactRouteFixer(route.path!, route.isExact)}`}
+                path={`${exactRouteFixer(route.path!, route.isExact)}`}
                 element={<route.element />}
               />
             ))}
         </Route>
         <Route  element={<AdminRequire />}>
             <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Admin/>}/>
               {adminRoutes()?.map((route, index) => (
                 <Route
                   key={index}

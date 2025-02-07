@@ -1,16 +1,68 @@
-import { NavLink, Outlet } from "react-router-dom"
+import {  Outlet } from "react-router-dom"
+import Navigation from "../navigation/Navigation"
+import { useEffect, useState } from "react";
+import $api from "../../utils/helpers/axiosInstance";
+import axios from "axios";
+
+
+interface KeyModel {
+    id:number,
+    name: string;
+}
 
 const MainLayout:React.FC = () => {
+    const [keys, setKeys] = useState<KeyModel[] | null>(null);
+    const [data, setData] = useState<KeyModel[] | null>(null);
+    useEffect(() => {
+        $api.get<KeyModel[]>("api/keys")
+            .then((response) => {
+                setKeys(response.data);
+               
+            })
+            .catch(() => {
+               console.log("")
+            })
+            .finally(() => {
+                console.log("")
+            });
+    }, []);
+
+
+
+
+    useEffect(() => {
+        axios.get<KeyModel[]>("https://2a85-194-93-25-25.ngrok-free.app/api/keys")
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch(() => {
+               console.log("")
+            })
+            .finally(() => {
+                console.log("")
+            });
+    }, []);
+
+console.log(keys)
+console.log(data)
+
     return (
-        <div>main layout 
+        <div>
+            LOGOTYPE 
+          
+            <Navigation/>
+            {keys?.map(item => (
+                <div key={item.name}>
+                    <h3>{item.id}</h3><br />
+                    <h3>{item.name}</h3><br />
+                </div>
+            ))}
             <br />
-            <NavLink to={"/elfasa"}>Main</NavLink><br />
-            <NavLink to={"/elfasa/profile"}>Profile</NavLink><br />
-            <NavLink to={"/elfasa/order"}>Order</NavLink><br />
-            <NavLink to={`/elfasa/admin`}>admin</NavLink><br />
-            <br />
-            <br />
-            <Outlet/></div>
+            
+            <Outlet/>
+            
+            
+            </div>
     )
 }
 

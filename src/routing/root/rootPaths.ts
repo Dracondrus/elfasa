@@ -1,7 +1,7 @@
 
 export const rootPaths = {
-    ORDER: "/order",
-    PROFILE: "/profile",
-    DELIVERY: "/delivery",
+    ORDER: "order",
+    DELIVERY: "delivery",
+    PROFILE: "profile",
    
 }
