@@ -1,9 +1,11 @@
-
+import { NavLink } from "react-router-dom"
 
 const UsersTable:React.FC = () => {
 
     return (
-        <div>Users Table</div>
+        <div>Users Table <br />
+         <NavLink to={"/elfasa"}>main</NavLink>
+        </div>
     )
 }
 

@@ -1,9 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom"
-import { AdminPaths } from "../../../../routing/admin/adminPaths"
-
 
 const MainLayout:React.FC = () => {
-    console.log(`/elfasa/${AdminPaths.USERSTABLE}`)
     return (
         <div>main layout 
             <br />

@@ -3,14 +3,18 @@ import $api from '../utils/helpers/axiosInstance';
 import { UserModel } from '../utils/models/UserModel';
 
 export const useOnCheckUser = () => {
-  return useQuery<UserModel[], Error>({
-    queryKey: ['users'], 
+  return useQuery<UserModel | null, Error>({
+    queryKey: ["user"],
     queryFn: async () => {
-      const response = await $api.get('/api/users');
-      return response.data; 
+      let token = localStorage.getItem("ELFASA_setup_userToken");
+      if (!token) token = ""
+
+      const response = await $api.get(`/api/users/${token}`);
+      return response.data;
     },
-    retry: 2, 
+    retry: 2,
     refetchOnWindowFocus: false,
+    
   });
 };
 

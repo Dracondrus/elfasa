@@ -1,34 +1,38 @@
 import React, { Suspense } from "react";
-import { Route, useLocation } from "react-router";
+import { Route } from "react-router";
 import { Routes } from "react-router-dom";
 
 import {  rootRoutes } from "./rootRoutes";
 import MainLayout from "../../features/app/components/main-layout/MainLayout";
-
+import { exactRouteFixer } from "../../features/app/utils/helpers/exactRouterFixer";
 import NotFound from "../../features/app/components/not-found/NotFound";
 import Loading from "../../features/app/components/loading/Loading";
 import UsersTable from "../../features/admin/components/UsersTable";
-// import { LocalStorage } from "../../hooks/LocalStorage";
-// import { USER } from "../../features/app/utils/constants/LocalStorageKeys";
+import AvoidAuth from "../../features/app/components/avoid-auth/AvoidAuth";
+import Auth from "../../features/app/components/auth/Auth";
+import RequireAuth from "../../features/app/components/require-auth/RequireAuth";
 
 const RootRouter: React.FC = () => {
-  // const isadmin = LocalStorage.get(USER);
-const userws=  useLocation();
-console.log(userws.pathname)
+
+
   return (
     <Suspense fallback={<Loading/>}>
       <Routes>
-        <Route path="/elfasa" element={<MainLayout />}>
+        <Route element={<AvoidAuth/>}>
+        <Route path="/elfasa/auth" element={<Auth/>}/></Route>
+        <Route path="elfasa/" element={<MainLayout />}>
+        <Route element={<RequireAuth/>}>
         {rootRoutes()?.map((route, index) => (
               <Route
                 key={index}
-                path={`/elfasa/${route.path}`}
+                path={`/elfasa/${exactRouteFixer(route.path!, route.isExact)}`}
                 element={<route.element />}
               />
             ))}
+        </Route>
             </Route>
+           
             <Route path="/elfasa/userstable" element={<UsersTable/>}/>
-            {/* {isadmin ? <Route path="/elfasa/" element={<UsersTable/>}/>: <Route path="*" element={<NotFound />} />} */}
             <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
