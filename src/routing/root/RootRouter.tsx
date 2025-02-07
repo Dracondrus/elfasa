@@ -2,15 +2,18 @@ import React, { Suspense } from "react";
 import { Route } from "react-router";
 import { Routes } from "react-router-dom";
 
+import { exactRouteFixer } from "../../features/app/utils/helpers/exactRouterFixer";
+import { adminRoutes } from "../admin/adminRoutes";
 import {  rootRoutes } from "./rootRoutes";
 import MainLayout from "../../features/app/components/main-layout/MainLayout";
-import { exactRouteFixer } from "../../features/app/utils/helpers/exactRouterFixer";
 import NotFound from "../../features/app/components/not-found/NotFound";
 import Loading from "../../features/app/components/loading/Loading";
-import UsersTable from "../../features/admin/components/UsersTable";
+
 import AvoidAuth from "../../features/app/components/avoid-auth/AvoidAuth";
 import Auth from "../../features/app/components/auth/Auth";
 import RequireAuth from "../../features/app/components/require-auth/RequireAuth";
+import AdminRequire from "../../features/admin/components/admin-require/AdminRequire";
+import AdminLayout from "../../features/admin/components/admin-layout/AdminLayout";
 
 const RootRouter: React.FC = () => {
 
@@ -19,8 +22,9 @@ const RootRouter: React.FC = () => {
     <Suspense fallback={<Loading/>}>
       <Routes>
         <Route element={<AvoidAuth/>}>
-        <Route path="/elfasa/auth" element={<Auth/>}/></Route>
-        <Route path="elfasa/" element={<MainLayout />}>
+          <Route path="elfasa/auth" element={<Auth/>}/>
+        </Route>
+      <Route path="elfasa/" element={<MainLayout />}>
         <Route element={<RequireAuth/>}>
         {rootRoutes()?.map((route, index) => (
               <Route
@@ -30,9 +34,18 @@ const RootRouter: React.FC = () => {
               />
             ))}
         </Route>
+        <Route  element={<AdminRequire />}>
+            <Route path="admin" element={<AdminLayout />}>
+              {adminRoutes()?.map((route, index) => (
+                <Route
+                  key={index}
+                  path={exactRouteFixer(route.path!, route.isExact)}
+                  element={<route.element />}
+                />
+              ))}
             </Route>
-           
-            <Route path="/elfasa/userstable" element={<UsersTable/>}/>
+          </Route>
+      </Route>
             <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

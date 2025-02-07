@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LocalStorage } from "../../hooks/LocalStorage";
-import { ADMIN, AUTH, USER } from "../../features/app/utils/constants/LocalStorageKeys";
+import { LocalStorage } from "../../features/app/service/LocalStorage";
+import { USER } from "../../features/app/utils/constants/LocalStorageKeys";
 
 
-const initialState: { user: string | null, isAuth: boolean , isAdmin : string | null} = {
+const initialState: { user: string | null, isAuth: boolean } = {
     user: LocalStorage.get<string>(USER) ?? null,
-    isAuth: Boolean(LocalStorage.get(AUTH)) ?? false,
-    isAdmin : LocalStorage.get<string>(ADMIN) ?? null
+    isAuth: Boolean(LocalStorage.get<string>(USER)) ,
+
 }
 
 const userReducer = createSlice({
-    name: USER,
+    name: "user",
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<string | null>) => {
@@ -19,19 +19,12 @@ const userReducer = createSlice({
         logout: (state) => {
             state.isAuth = false;
             state.user = null;
-            state.isAdmin = null;
             LocalStorage.clear();
         },
-
         setIsAuth: (state, action: PayloadAction<boolean>) => {
-            LocalStorage.set(USER, action.payload);
             state.isAuth = action.payload;
         },
-        setIsAdmin: (state, action: PayloadAction<string>) => { 
-            LocalStorage.set(ADMIN, action.payload);
-            state.isAdmin = action.payload;
-        }
-   
+    
     }
 })
 

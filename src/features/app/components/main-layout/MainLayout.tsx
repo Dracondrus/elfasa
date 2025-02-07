@@ -7,7 +7,7 @@ const MainLayout:React.FC = () => {
             <NavLink to={"/elfasa"}>Main</NavLink><br />
             <NavLink to={"/elfasa/profile"}>Profile</NavLink><br />
             <NavLink to={"/elfasa/order"}>Order</NavLink><br />
-            <NavLink to={`/elfasa/userstable`}>USERSTABLE</NavLink><br />
+            <NavLink to={`/elfasa/admin`}>admin</NavLink><br />
             <br />
             <br />
             <Outlet/></div>

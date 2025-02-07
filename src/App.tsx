@@ -4,38 +4,41 @@ import { BrowserRouter } from "react-router-dom";
 
 import ErrorBoundary from "./features/app/components/error-boundary/ErrorBoundary";
 import Loading from "./features/app/components/loading/Loading";
-import { LocalStorage } from "./hooks/LocalStorage";
-import { useAppDispatch } from "./hooks/redux";
-import { userReducerActions } from "./store/reducers/userReducer";
-import { USER } from "./features/app/utils/constants/LocalStorageKeys";
 
-import "./styles/common.scss"
-import "./styles/main.scss"
+import "./styles/common.scss";
+import "./styles/main.scss";
+import { USER } from "./features/app/utils/constants/LocalStorageKeys";
+import { LocalStorage } from "./features/app/service/LocalStorage";
+import { userReducerActions } from "./store/reducers/userReducer";
+import { useDispatch } from "react-redux";
+
+const RootRouter = lazy(() => import("./routing/root/RootRouter"));
 
 function App() {
-  const queryClient = new QueryClient();
-  const RootRouter = lazy(() => import("./routing/root/RootRouter"));
 
-  const dispatch = useAppDispatch();
+  const queryClient = new QueryClient();
+  const dispatch = useDispatch();
+  const { setIsAuth } = userReducerActions;
 
   useEffect(() => {
-    const handleStorageChange = () => {
-        const user = LocalStorage.get(USER);
-        dispatch(userReducerActions.setIsAuth(!!user ));
+    const onStorageChange = () => {
+      dispatch(setIsAuth(Boolean(LocalStorage.get(USER))));
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-    
-}, []);
+    window.addEventListener("storage", onStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", onStorageChange);
+    };
+  }, []);
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <Suspense fallback={<Loading />}>
-              <RootRouter />
-            </Suspense>
-          </BrowserRouter>
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <RootRouter />
+          </Suspense>
+        </BrowserRouter>
       </QueryClientProvider>
     </ErrorBoundary>
   );
