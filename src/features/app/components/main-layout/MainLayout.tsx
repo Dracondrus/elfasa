@@ -31,7 +31,7 @@ const MainLayout:React.FC = () => {
 
 
     useEffect(() => {
-        axios.get<KeyModel[]>("https://2a85-194-93-25-25.ngrok-free.app/api/keys")
+        axios.get<KeyModel[]>("https://e3e7-194-93-25-25.ngrok-free.app/api/keys")
             .then((response) => {
                 setData(response.data);
             })
