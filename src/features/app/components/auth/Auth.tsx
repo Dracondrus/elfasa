@@ -19,7 +19,7 @@ const { setUser ,setIsAuth} = userReducerActions;
 const [isLogin, setIsLogin] = useState(false);
 const onLogin = () => {
     dispatch(setUser("user"));
-    LocalStorage.set(USER, "user");
+    LocalStorage.set(USER, "madenrea");
     dispatch(setIsAuth(true));
 
   navigate("/elfasa");
