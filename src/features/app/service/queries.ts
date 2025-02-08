@@ -1,6 +1,6 @@
 import {  useQuery } from "@tanstack/react-query";
 import $api from '../utils/helpers/axiosInstance';
-import { UserModel } from '../utils/models/UserModel';
+
 import { IKeys } from "../components/main-layout/MainLayout";
 
 
