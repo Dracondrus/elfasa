@@ -1,14 +1,15 @@
 import {  useQuery } from "@tanstack/react-query";
 import $api from '../utils/helpers/axiosInstance';
 import { UserModel } from '../utils/models/UserModel';
+import { IKeys } from "../components/main-layout/MainLayout";
 
 
 
-export const useGetUsers = () => {
-  return useQuery<UserModel, Error>({
+export const useGetKeys = () => {
+  return useQuery<IKeys[], Error>({
     queryKey: ['admin'], 
     queryFn: async () => {
-      const response = await $api.get('/api/users');
+      const response = await $api.get<IKeys[]>('/api/keys');
       return response.data; 
     },
     retry: 2, 
