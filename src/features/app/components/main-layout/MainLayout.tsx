@@ -1,26 +1,15 @@
 import {  Outlet } from "react-router-dom"
 import Navigation from "../navigation/Navigation"
+import Logotype from "../Logotype/Logotype";
 
-
-export interface IKeys {
-    id:number;
-    name:string;
-}
 const MainLayout:React.FC = () => {
-
   
     return (
         <div>
-            LOGOTYPE
-          <br />
-            <Navigation/>
-          
-            <br />
-            
-            <Outlet/>
-            
-            
-            </div>
+            <Logotype />
+            <Navigation />
+            <Outlet /> 
+        </div>
     )
 }
 

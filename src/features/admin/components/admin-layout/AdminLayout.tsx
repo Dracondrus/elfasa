@@ -5,7 +5,7 @@ const AdminLayout :React.FC = () => {
 
 
     return (
-        <div>
+        <div className="admin__container">
             <Outlet/>
         </div>
     )

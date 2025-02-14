@@ -1,0 +1,11 @@
+
+.container {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    letter-spacing: 3px;
+    font-size: var(--fz20);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: var(--fw700);
+    color: var(--white);
+}

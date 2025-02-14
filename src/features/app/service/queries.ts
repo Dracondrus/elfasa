@@ -1,9 +1,6 @@
 import {  useQuery } from "@tanstack/react-query";
 import $api from '../utils/helpers/axiosInstance';
-
-import { IKeys } from "../components/main-layout/MainLayout";
-
-
+import { IKeys } from "../utils/models/KeyModel";
 
 export const useGetKeys = () => {
   return useQuery<IKeys[], Error>({

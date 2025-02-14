@@ -8,8 +8,24 @@ import { rootPaths } from "../../../../routing/root/rootPaths";
 
 import styles from "./Navigation.module.scss";
 
+import Product from "../../assets/product.svg"
+import Delivery from "../../assets/delivery.svg";
+import Order from "../../assets/order.svg";
+import Profile from "../../assets/profile.svg";
+
+interface img {
+    id: number,
+    src: string
+}
+
 const Navigation: React.FC = () => {
 
+    const imgs: img[] = [
+        {id: 1 , src: Order},
+        {id: 2 , src: Delivery},
+        {id: 3 , src: Profile}
+     
+    ]
     const [isAdmin, setIsAdmin] = useState(
         LocalStorage.get(USER) === import.meta.env.VITE_ADMIN_KEY
     );  
@@ -30,7 +46,7 @@ const Navigation: React.FC = () => {
         <div className={styles.navigation}>
             
             {isAdmin && (
-                <div className={styles.admin__menu}>
+                <div className="admin__container admin__menu">
                     <NavLink to="/elfasa/admin">E L F A S A</NavLink>
                     {Object.values(AdminPaths).map((path) => (
                     <NavLink key={path} to={`/elfasa/admin/${path}`}>
@@ -40,14 +56,27 @@ const Navigation: React.FC = () => {
                 </div>
             )}
              <div className={styles.container__menu}>
-                 <div className={styles.menu} >
-                <NavLink to="/elfasa">Main</NavLink>
-                {Object.values(rootPaths).map((path) => (
-                    <NavLink key={path} to={`/elfasa/${path}`}>
-                        {path.charAt(0).toUpperCase() + path.slice(1)}
-                    </NavLink>
-                ))}
-                 </div>
+             <div className={styles.menu}>
+             <NavLink 
+    to="/elfasa" 
+    end
+    className={({ isActive }) => isActive ? styles.active : ""}
+>
+    <img src={Product} alt="" height="26" width="26" />
+</NavLink>
+
+
+    {Object.values(rootPaths).map((path, index) => (
+        <NavLink 
+            key={path} 
+            to={`/elfasa/${path}`} 
+            className={({ isActive }) => isActive ? styles.active : ""}
+        >
+            <img src={imgs[index % imgs.length].src} height="26" width="26" loading="lazy" />
+        </NavLink>
+    ))}
+</div>
+
             </div>
         </div>
     );

@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.text {
+    font-size: 2.9rem;
+    font-weight: 700;
+}
+
+.subtext {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.link {
+    color: rgb(227, 3, 227);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    opacity: 0.7;
+}
