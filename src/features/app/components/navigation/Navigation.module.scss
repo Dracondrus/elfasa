@@ -2,6 +2,9 @@
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+       position: absolute;
+       z-index: 10100;
+       top: 2px;
     }
 
     .container__menu {
@@ -21,7 +24,7 @@
         max-width: 576px; /* Ограничиваем ширину */
 
         padding: 10px 0;
-    
+        background: var(--black);
         border-top: 2px solid #fff;
     }
     .menu img {

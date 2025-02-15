@@ -1,10 +1,10 @@
-export interface UserModel {
-    Id: number;
-    UniqueKey: string;
-    UniqueKeyProduct: string;
-    UserName: string;
-    Password: string;
-    PhoneNumber: string;
-    Address: string;
-    Something: string;
+export interface IUserModel {
+    id: number;
+    uniqueKey: string;
+    uniqueKeyProduct: string;
+    userName: string;
+    password: string;
+    phoneNumber: string;
+    address: string;
+    something: string;
   }

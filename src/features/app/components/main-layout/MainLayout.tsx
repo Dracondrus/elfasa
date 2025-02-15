@@ -1,16 +1,17 @@
 import {  Outlet } from "react-router-dom"
 import Navigation from "../navigation/Navigation"
-import Logotype from "../Logotype/Logotype";
+import Logotype from "../logotype/Logotype";
 
 const MainLayout:React.FC = () => {
-  
     return (
         <div>
-            <Logotype />
+            <Logotype /> 
             <Navigation />
-            <Outlet /> 
+           <div className="padding"> <Outlet /></div>
+           
         </div>
     )
 }
 
 export default MainLayout
+

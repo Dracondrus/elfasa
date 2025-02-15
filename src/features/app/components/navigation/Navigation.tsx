@@ -44,9 +44,9 @@ const Navigation: React.FC = () => {
 
     return (
         <div className={styles.navigation}>
-            
+        
             {isAdmin && (
-                <div className="admin__container admin__menu">
+                <div className={styles.admin__menu}>
                     <NavLink to="/elfasa/admin">E L F A S A</NavLink>
                     {Object.values(AdminPaths).map((path) => (
                     <NavLink key={path} to={`/elfasa/admin/${path}`}>
