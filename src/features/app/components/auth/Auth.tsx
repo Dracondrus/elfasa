@@ -1,40 +1,27 @@
-import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { LocalStorage } from "../../service/LocalStorage";
-import { USER } from "../../utils/constants/LocalStorageKeys";
-import { userReducerActions } from "../../../../store/reducers/userReducer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-
-// import style from "./Auth.module.scss"
+import styles from "./Auth.module.scss"
+import { Button } from "antd";
 
 const Auth: React.FC = () => {
 
-const navigate = useNavigate()
-const dispatch = useDispatch()
-const { setUser ,setIsAuth} = userReducerActions;
-const [isLogin, setIsLogin] = useState(false);
-const onLogin = () => {
-    dispatch(setUser("user"));
-    LocalStorage.set(USER, "madenrea");
-    dispatch(setIsAuth(true));
+const [isLogin, setIsLogin] = useState(true);
 
-  navigate("/elfasa");
-
-};
 
   return (
-    <div>
+    <div className={styles.container}>
 
-  <button onClick={onLogin}>Login</button>
-  <br />
-<button onClick={() => setIsLogin(prev => !prev)}>{isLogin ? "перейти на регистрация перейти на логин" : " перейти на логин"}</button>
-  <br />
+
+{isLogin? <Login/> : <Register/>}
+<br />
+<Button type="primary" className={styles.btn} onClick={() => setIsLogin(prev => !prev)}>{isLogin ? "перейти  на регистрацию" : " перейти на логин"}</Button>
+
   <NavLink to={'/elfasa'}>Перейти на главную</NavLink><br />
-  {isLogin? <Login/> : <Register/>}
+
     </div>
   );
 };

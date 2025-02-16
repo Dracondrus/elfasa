@@ -55,9 +55,10 @@ const UsersTable: React.FC = () => {
     }
   };
 
-  const deleteUser = async (id: number) => {
+  const deleteUser = async (uniqueKey: string) => {
+    console.log(uniqueKey)
     try {
-      await $api.delete(`/api/users/${id}`);
+      await $api.delete(`/api/users/${uniqueKey}`);
       message.success("Пользователь удалён");
       refetch();
     } catch {
@@ -84,7 +85,7 @@ const UsersTable: React.FC = () => {
       render: (_: any, record: IUserModel) => (
         <>
           <Button type="primary" onClick={() => { setEditingUser(record); setIsEditModalOpen(true); }}>Редактировать</Button> &nbsp;
-          <Button danger onClick={() => deleteUser(record.id)}>Удалить</Button>
+          <Button danger onClick={() => deleteUser(record.uniqueKey)}>Удалить</Button>
         </>
       ),
     },
