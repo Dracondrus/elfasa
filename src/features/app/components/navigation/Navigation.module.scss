@@ -16,18 +16,19 @@
 
     .menu {
         display: flex;
-        justify-content: space-around; /* Равномерное распределение элементов */
-        position: fixed; /* Фиксируем внизу */
+        justify-content: space-around;
+        position: fixed;
         bottom: 0;
-        left: 50%; /* Центрируем по горизонтали */
-        transform: translateX(-50%); /* Смещаем влево на половину ширины */
+        left: 50%;
+        transform: translateX(-50%);
         width: 100%;
-        max-width: 576px; /* Ограничиваем ширину */
-
+        max-width: 576px;
+        background: black; /* Черный фон */
         padding: 10px 0;
-        background: var(--black);
         border-top: 2px solid #fff;
+        z-index: 1000; /* Поднятие меню выше других элементов */
     }
+    
     .menu img {
         filter: invert(1); /* Делаем иконки белыми */
         transition: transform 0.3s ease;

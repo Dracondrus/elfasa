@@ -1,0 +1,77 @@
+
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+
+.productName {
+    font-weight: 800;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.input {
+    max-width: 260px;
+    width: 100%;
+    margin: 10px auto;
+    
+   height: 30px;
+}
+
+.productPriceExp {
+    position: relative;
+    color: gray;
+    font-size: 14px;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0px;
+        bottom:2px;
+        width: 100%;
+        height: 2px;
+        background-color: gray;
+        transform: rotate(-7deg);
+        transform-origin: bottom left;
+    }
+}
+
+.productDesc {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65%; /* Остальные 65% */
+    width: 100%;
+    text-align: center;
+}
+.btn {
+    font-weight: 500;
+    height: 24px !important;
+}
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    width: 140px;
+    height: 190px;
+    border: 2px solid gray;
+    border-radius: 10px 10px 10px 10px; // Закругление всех углов
+    overflow: hidden; // Чтобы img не выходил за границы
+}
+
+.productImage {
+    width: 100%; /* Растягиваем на всю ширину родителя */
+    height: 45%; /* 45% от высоты .product */
+    object-fit: cover; /* Обрезка по размеру контейнера */
+    border-radius: 10px 10px 0 0; // Закругление только сверху справа и слева
+}

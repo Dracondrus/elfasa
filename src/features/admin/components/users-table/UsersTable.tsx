@@ -56,7 +56,7 @@ const UsersTable: React.FC = () => {
   };
 
   const deleteUser = async (uniqueKey: string) => {
-    console.log(uniqueKey)
+    
     try {
       await $api.delete(`/api/users/${uniqueKey}`);
       message.success("Пользователь удалён");

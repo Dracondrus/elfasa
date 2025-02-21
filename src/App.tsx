@@ -25,6 +25,11 @@ function App() {
       dispatch(setIsAuth(Boolean(LocalStorage.get(USER))));
     };
 
+    if(!Boolean(LocalStorage.get(USER))) {
+      LocalStorage.clear();
+    } 
+
+
     window.addEventListener("storage", onStorageChange);
 
     return () => {
