@@ -1,9 +1,10 @@
-import { Button, Input } from "antd";
+import {  Input } from "antd";
 import { useState } from "react";
-import { useGetProducts } from "../../service/queries";
 
+import { useGetProducts } from "../../service/queries";
 import IsError from "../IsError/IsError";
 import Isloading from "../loading/Loading";
+
 import styles from "./Products.module.scss";
 
 const Products: React.FC = () => {
@@ -34,17 +35,20 @@ const Products: React.FC = () => {
             <div className={styles.products}>
                 {filteredProducts.map((product) => (
                     <div key={product.id} className={styles.product}>
-                        <img 
+                     <div className={styles.img}>
+                     <img 
                             src={`data:image/png;base64,${product.productImage}`} 
                             alt={product.productName} 
                             className={styles.productImage} 
                         />
+                     </div>
                         <div className={styles.productDesc}>
                             <div className={styles.productName}>{product.productName}</div>
                             <div className={styles.productPriceExp}>{product.productPriceExp} сум</div>
-                            <p>{product.productPrice} сум</p>
-                            <Button onClick={() =>onGetProduct(product.id)} className={styles.btn} type="primary">Добавить +</Button>
+                            <div className={styles.productPrice}>{product.productPrice} сум</div>
+                            <button onClick={() =>onGetProduct(product.id)} className={styles.btn} > +</button>
                         </div>
+                     
                     </div>
                 ))}
             </div>
