@@ -1,4 +1,4 @@
-import { Table, Button, Upload, Input, Form, Modal, message } from "antd";
+import { Table, Button, Upload, Input, Form, Modal, message, Select } from "antd";
 import { UploadOutlined, SearchOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { RcFile } from "antd/es/upload";
@@ -29,9 +29,11 @@ const ProductsTable: React.FC = () => {
     formData.append("ProductCategory", values.productCategory);
     formData.append("ProductPrice", values.productPrice.toString());
     formData.append("ProductPriceExp", values.productPriceExp.toString());
+    formData.append("ProductAmount", values.productAmount.toString()); // Добавлено
+    formData.append("ProductType", values.productType); // Добавлено
     formData.append("Smth", values.smth);
     if (file) formData.append("image", file);
-
+  
     try {
       if (selectedProduct) {
         await $api.put(`/api/products/${selectedProduct.id}`, formData, {
@@ -53,6 +55,7 @@ const ProductsTable: React.FC = () => {
       message.error("Ошибка сохранения продукта");
     }
   };
+  
 
   const handleDelete = async (id: number) => {
     try {
@@ -81,6 +84,8 @@ const ProductsTable: React.FC = () => {
     { title: "Категория", dataIndex: "productCategory", key: "productCategory" },
     { title: "Дорогая цена", dataIndex: "productPriceExp", key: "productPriceExp", render: (price) => `${price} сум` },
     { title: "Цена", dataIndex: "productPrice", key: "productPrice", render: (price) => `${price} сум` },
+    { title: "Количество", dataIndex: "productAmount", key: "productAmount", render: (price) => `${price} ` },
+    { title: "Тип", dataIndex: "productType", key: "productType", render: (price) => `${price} ` },
     {
       title: "Действия",
       key: "actions",
@@ -118,15 +123,48 @@ const ProductsTable: React.FC = () => {
           <Form.Item name="productName" label="Название" rules={[{ required: true, message: "Введите название" }]}> 
             <Input />
           </Form.Item>
-          <Form.Item name="productCategory" label="Категория" rules={[{ required: true, message: "Введите категорию" }]}> 
-            <Input />
-          </Form.Item>
+          <Form.Item
+  name="productCategory"
+  label="Категория"
+  rules={[{ required: true, message: "Введите категорию" }]}
+>
+  <Select
+    showSearch
+    allowClear
+    placeholder="Выберите или введите категорию"
+
+  >
+    <Select.Option value="Овощи">Овощи</Select.Option>
+    <Select.Option value="Фрукты">Фрукты</Select.Option>
+    <Select.Option value="Напитки">Напитки</Select.Option>
+    <Select.Option value="Молочные продукты ">Молочные продукты </Select.Option>
+    <Select.Option value="Бакалея  ">Бакалея  </Select.Option> 
+    <Select.Option value="Яйца  ">Яйца  </Select.Option>
+  </Select>
+</Form.Item>
+
           <Form.Item name="productPriceExp" label="Дорогая цена" rules={[{ required: true, message: "Введите дорогую цену" }]}> 
             <Input type="number" step="1" min="0" />
           </Form.Item>
           <Form.Item name="productPrice" label="Цена" rules={[{ required: true, message: "Введите цену" }]}> 
             <Input type="number" step="1" min="0" />
           </Form.Item>
+          <Form.Item name="productAmount" label="Количество" rules={[{ required: true, message: "Введите количество" }]}> 
+  <Input type="number" step="1" min="0" />
+</Form.Item>
+
+<Form.Item
+  name="productType"
+  label="Тип продукта"
+  rules={[{ required: true, message: "Выберите тип продукта" }]}
+>
+  <Select placeholder="Выберите тип">
+    <Select.Option value="шт">Штука (шт)</Select.Option>
+    <Select.Option value="кг">Килограмм (кг)</Select.Option>
+  </Select>
+</Form.Item>
+
+
           <Form.Item name="smth" label="Примечание">
             <Input />
           </Form.Item>

@@ -27,6 +27,7 @@ function App() {
 
     if(!Boolean(LocalStorage.get(USER))) {
       LocalStorage.clear();
+      localStorage.clear()
     } 
 
 

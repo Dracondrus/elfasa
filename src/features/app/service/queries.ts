@@ -5,6 +5,7 @@ import { IUserModel } from "../utils/models/UserModel";
 import { LocalStorage } from "./LocalStorage";
 import { USER } from "../utils/constants/LocalStorageKeys";
 import { IProduct } from "../utils/models/ProductModel";
+  import {  IWorkerModel } from "../utils/models/WorkerModel";
 
 export const useGetKeys = () => {
   return useQuery<IKeys[], Error>({
@@ -41,11 +42,24 @@ export const useGetProfile = () => {
     refetchOnWindowFocus: false, 
   });
 }
+
 export const useGetProducts = () => {
   return useQuery<IProduct[], Error>({
     queryKey: ['products'], 
     queryFn: async () => {
       const response = await $api.get<IProduct[]>(`/api/products`);
+      return response.data; 
+    },
+    retry: 2, 
+    refetchOnWindowFocus: false, 
+  });
+}
+
+export const useGetWorkers = () => {
+  return useQuery<IWorkerModel[], Error>({
+    queryKey: ['products'], 
+    queryFn: async () => {
+      const response = await $api.get<IWorkerModel[]>("/api/workers");
       return response.data; 
     },
     retry: 2, 
